@@ -1,0 +1,31 @@
+---
+title: "Baby Names Over Time"
+author: "Avalee Lenard"
+format: html
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+
+# Read the combined SSA baby names dataset
+names_df <- read_csv("ssa-baby-names.csv", show_col_types = FALSE)
+
+# Filter for the chosen name and plot counts over time
+names_df |>
+  filter(name == "Avalee") |>
+  ggplot(aes(x = year, y = count, color = sex)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Babies Named Avalee Over Time",
+    subtitle = "U.S. Social Security Administration baby names data",
+    x = "Year",
+    y = "Number of Babies",
+    color = "Sex"
+  ) +
+  theme_minimal()
+```
